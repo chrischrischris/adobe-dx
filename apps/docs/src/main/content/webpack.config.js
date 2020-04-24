@@ -21,24 +21,17 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const stats = require('./webpack.config/stats');
 
-const projectName = 'dx';
-const project = `./src/main/content/jcr_root/apps/${projectName}/config-manager/common/clientlibs`;
+const projectName = 'dx-docs';
+const project = `./jcr_root/apps/${projectName}/clientlibs`;
 
 module.exports = {
     entry: {
-        registry: [
-            `${project}/registry/src/js/app.js`,
-        ],
         configs: [
             `${project}/configs/src/js/app.js`,
         ],
-        react: [
-            `${project}/react/src/js/app.js`,
-            `${project}/react/src/less/app.less`,
-        ],
     },
     output: {
-        path: `${__dirname}/src/main/content/jcr_root/apps/${projectName}/config-manager/common/clientlibs`,
+        path: `${__dirname}/jcr_root/apps/${projectName}/clientlibs`,
         filename: '[name]/dist/js/app.min.js',
     },
     module: {
