@@ -83,10 +83,7 @@ module.exports = {
     module: {
         rules,
     },
-    optimization: {
-        minimize: true,
-        minimizer: [new TerserPlugin()],
-    },
+    devtool: 'eval-cheap-module-source-map',
     plugins: [
         new webpack.DefinePlugin({
             'process.env.SCALE_MEDIUM': 'true',
