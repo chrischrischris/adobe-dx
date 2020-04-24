@@ -1,5 +1,5 @@
 /*
- *  Copyright 2020 Adobe
+ *  Copyright 2019 Adobe
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -14,16 +14,28 @@
  *  limitations under the License.
  */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import ConfigManager from './ConfigManager';
-
-// dx.configmanager.react
-const admin = document.getElementById('dx-ContentFrame');
-
-if (admin) {
-    const props = {
-        dataSourcePath: admin.dataset.columnviewDatasource,
-    };
-    ReactDOM.render(<ConfigManager {...props} />, admin);
-}
+module.exports = {
+    cached: false,
+    cachedAssets: false,
+    children: false,
+    chunks: false,
+    chunkModules: false,
+    chunkOrigins: false,
+    colors: true,
+    depth: false,
+    entrypoints: false,
+    hash: false,
+    maxModules: 0,
+    modules: false,
+    performance: false,
+    providedExports: false,
+    publicPath: false,
+    reasons: false,
+    source: false,
+    usedExports: false,
+    version: false,
+    timings: true,
+    errors: true,
+    errorDetails: true,
+    warnings: true,
+};

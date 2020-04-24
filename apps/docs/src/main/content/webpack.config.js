@@ -21,67 +21,37 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const stats = require('./webpack.config/stats');
 
-const projectName = 'dx';
-const project = `./src/main/content/jcr_root/apps/${projectName}/config-manager/common/clientlibs`;
-
-const isProduction = process.env.NODE_ENV === 'production';
-
-if (isProduction) {
-    console.log('Production Build');
-}
-
-const rules = [
-    {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        enforce: 'pre',
-        loader: 'eslint-loader',
-        options: {
-            failOnError: true,
-        },
-    },
-    {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-            loader: 'babel-loader',
-        },
-    },
-    {
-        test: /\.(css|less)$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
-    },
-];
-
-if (!isProduction) {
-    rules.push({
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: {
-            loader: 'prettier-loader',
-        },
-    });
-}
+const projectName = 'dx-docs';
+const project = `./jcr_root/apps/${projectName}/clientlibs`;
 
 module.exports = {
     entry: {
-        registry: [
-            `${project}/registry/src/js/app.js`,
-        ],
         configs: [
             `${project}/configs/src/js/app.js`,
         ],
-        react: [
-            `${project}/react/src/js/app.js`,
-            `${project}/react/src/less/app.less`,
-        ],
     },
     output: {
-        path: `${__dirname}/src/main/content/jcr_root/apps/${projectName}/config-manager/common/clientlibs`,
+        path: `${__dirname}/jcr_root/apps/${projectName}/clientlibs`,
         filename: '[name]/dist/js/app.min.js',
     },
     module: {
-        rules,
+        rules: [
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            },
+            {
+                test: /\.(css|less)$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'less-loader',
+                ],
+            },
+        ],
     },
     optimization: {
         minimize: true,
@@ -94,7 +64,7 @@ module.exports = {
             'process.env.THEME_LIGHT': 'true',
             'process.env.THEME_LIGHTEST': 'true',
             'process.env.THEME_DARK': 'false',
-            'process.env.THEME_DARKEST': 'false',
+            'process.env.THEME_DARKEST': 'false'
         }),
         new MiniCssExtractPlugin({ filename: '[name]/dist/css/app.min.css' }),
         new OptimizeCSSAssetsPlugin({}),
