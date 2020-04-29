@@ -49,8 +49,6 @@ export default class ConfigDialog extends React.Component {
                 // eslint-disable-next-line no-console
                 console.log('Error: ', err);
             });
-        console.log('Config Tree');
-        console.log(configTree);
         let { configKey } = configTree;
         if (this.props.item.isPage) {
             configKey = configTree['jcr:content'].configKey;
