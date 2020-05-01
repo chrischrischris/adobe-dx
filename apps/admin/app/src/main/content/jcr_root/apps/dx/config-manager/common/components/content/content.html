@@ -14,7 +14,8 @@
   ~ limitations under the License.
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
 <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
-     data-sly-call="${clientlib.css @ categories='dx.configmanager.react'}"></sly>
+     data-sly-call="${clientlib.css @ categories='dx.configmanager.react, dx.configmanager.configs'}"></sly>
 <section id="dx-ContentFrame" data-columnview-datasource="${resource.path}"></section>
-<!-- Create the Registry for Configs to use -->
-<sly data-sly-call="${clientlib.js @ categories='dx.configmanager.registry, dx.configmanager.configs, dx.configmanager.react'}"></sly>
+<!-- Create the Registry for Configs to use xxx -->
+<!-- <sly data-sly-call="${clientlib.js @ categories='dx.configmanager.reactumd'}"></sly> -->
+<sly data-sly-call="${clientlib.js @ categories='dx.configmanager.reactumd, dx.configmanager.registry, dx.configmanager.configs, dx.configmanager.react'}"></sly>

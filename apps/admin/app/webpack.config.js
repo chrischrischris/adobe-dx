@@ -65,17 +65,16 @@ if (!isProduction) {
 
 module.exports = {
     entry: {
-        registry: [
-            `${project}/registry/src/js/app.js`,
-        ],
-        configs: [
-            `${project}/configs/src/js/app.js`,
-        ],
-        react: [
-            `${project}/react/src/js/app.js`,
-            `${project}/react/src/less/app.less`,
-        ],
+        registry: [`${project}/registry/src/js/app.js`],
+        configs: [`${project}/configs/src/js/app.js`],
+        react: [`${project}/react/src/js/app.js`, `${project}/react/src/less/app.less`],
     },
+    externals: isProduction
+        ? {
+              react: 'React',
+              'react-dom': 'ReactDOM',
+          }
+        : {},
     output: {
         path: `${__dirname}/src/main/content/jcr_root/apps/${projectName}/config-manager/common/clientlibs`,
         filename: '[name]/dist/js/app.min.js',

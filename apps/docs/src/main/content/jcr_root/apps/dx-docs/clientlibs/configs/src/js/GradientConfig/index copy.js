@@ -14,9 +14,7 @@
  *  limitations under the License.
  */
 
-import React, { useEffect, useState } from "react";
-import Button from "@react/react-spectrum/Button";
-import ButtonGroup from "@react/react-spectrum/ButtonGroup";
+import React from "react";
 import { Form, FormItem } from "@react/react-spectrum/Form";
 import Textfield from "@react/react-spectrum/Textfield";
 import Select from "@react/react-spectrum/Select";
@@ -30,65 +28,72 @@ const DEFAULT_STATE = {
   replace: true,
 };
 
-const DEFAULT_SWATCHES = [];
+export default class GradientConfig extends React.Component {
+  constructor(props) {
+    super(props);
+    this.setupState();
+    this.setConfig();
+  }
 
-const GradientConfig = (props) => {
-  const [config, setConfig] = useState({});
-
-  useEffect(() => {
-    if (props.config.data) {
-      const { name, data } = props.config;
-      setConfig({ name, data, replace: true, cleanName: name });
+  setupState() {
+    if (this.props.config.data) {
+      const { name, data } = this.props.config;
+      this.state = { name, data, replace: true, cleanName: name };
     } else {
-      setConfig(DEFAULT_STATE);
+      this.state = DEFAULT_STATE;
     }
-  }, []);
+  }
 
-  useEffect(() => {
-    if (Object.keys(config).length) props.setConfig(config);
-  }, [config]);
-
-  const onNameChange = (name) => {
-    setConfig({ ...config, name });
+  setConfig = () => {
+    this.props.setConfig(this.state);
   };
 
-  const cleanName = (value) => {
+  onNameChange = (value) => {
+    this.setState({ name: value }, this.setConfig);
+  };
+
+  cleanName = (value) => {
     return value.replace(/\W/g, "");
   };
 
-  const onContentChange = (value, e) => {
-    const updatedConfig = { data: config.data };
-    updatedConfig.data[e.target.name] = value;
-    if (e.target.name === "text" && props.mode === "new") {
-      updatedConfig.name = cleanName(value);
+  onContentChange = (value, e) => {
+    const data = this.state.data;
+    data[e.target.name] = value;
+    if (e.target.name === "text" && this.props.mode === "new") {
+      this.setState({ name: this.cleanName(value) });
     }
-    setConfig({ ...config, ...updatedConfig });
+    this.setState({ data }, this.setConfig);
   };
 
-  return (
-    <>
+  render() {
+    return (
       <Form>
         <FormItem label="Name">
           <Textfield
             disabled
             name="name"
-            value={config.name}
+            value={this.state.name}
             placeholder="name"
-            onChange={onNameChange}
+            onChange={this.onNameChange}
           />
         </FormItem>
         <FormItem label="Text">
           <Textfield
             name="text"
-            value={config.data && config.data.text}
+            value={this.state.data.text}
             placeholder="Text"
-            onChange={onContentChange}
+            onChange={this.onContentChange}
+          />
+        </FormItem>
+        <FormItem label="Value">
+          <Textfield
+            name="value"
+            value={this.state.data.value}
+            placeholder="Value"
+            onChange={this.onContentChange}
           />
         </FormItem>
       </Form>
-      <GradientPicker />
-    </>
-  );
-};
-
-export default GradientConfig;
+    );
+  }
+}

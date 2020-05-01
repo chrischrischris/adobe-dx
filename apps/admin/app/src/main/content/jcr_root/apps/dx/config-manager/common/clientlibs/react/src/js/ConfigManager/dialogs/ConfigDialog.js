@@ -58,7 +58,8 @@ export default class ConfigDialog extends React.Component {
             this.setState({ view: window.dx.configManager.configs[configKey] });
             const config = {
                 name: this.props.item.name,
-                data: configTree };
+                data: configTree,
+            };
             this.setState({ config });
         }
     };
@@ -66,7 +67,8 @@ export default class ConfigDialog extends React.Component {
     getSaveUrl = () => {
         let url = this.props.item.path;
         if (this.mode === 'new') {
-            return url += '/';
+            url += '/';
+            return url;
         }
         // Remove the name from the path as this is set via ":name"
         const idx = url.lastIndexOf('/');

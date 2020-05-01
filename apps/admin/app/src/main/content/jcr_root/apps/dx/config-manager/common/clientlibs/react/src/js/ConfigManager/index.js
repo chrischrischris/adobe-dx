@@ -84,29 +84,33 @@ class ConfigManager extends React.Component {
     }
 
     render() {
-        return (<>
-            <ActionMenu
-                fixedActionBar={this.state.fixedActionBar}
-                openDialog={this.openDialog}
-                toggleActionBar={this.toggleActionBar} />
-            <CreateMenu
-                onSelect={this.openDialog} />
-            <Provider theme="light" className="dx-Provider--ColumnView">
-                <ColumnView
-                    renderItem={columnItem}
-                    dataSource={this.state.dataSource}
-                    navigatedPath={this.state.selectedItems}
-                    onSelectionChange={this.selectionChange}
-                    onNavigate={this.navigate}
-                    allowsSelection />
-            </Provider>
-            <Dialog
-                open={this.state.dialogType !== undefined}
-                dialogType={this.state.dialogType}
-                onDialogClose={this.closeDialog}
-                configKey={this.state.configKey}
-                item={this.state.selectedItem} />
-        </>);
+        return (
+            <>
+                <ActionMenu
+                    fixedActionBar={this.state.fixedActionBar}
+                    openDialog={this.openDialog}
+                    toggleActionBar={this.toggleActionBar}
+                />
+                <CreateMenu onSelect={this.openDialog} />
+                <Provider theme="light" className="dx-Provider--ColumnView">
+                    <ColumnView
+                        renderItem={columnItem}
+                        dataSource={this.state.dataSource}
+                        navigatedPath={this.state.selectedItems}
+                        onSelectionChange={this.selectionChange}
+                        onNavigate={this.navigate}
+                        allowsSelection
+                    />
+                </Provider>
+                <Dialog
+                    open={this.state.dialogType !== undefined}
+                    dialogType={this.state.dialogType}
+                    onDialogClose={this.closeDialog}
+                    configKey={this.state.configKey}
+                    item={this.state.selectedItem}
+                />
+            </>
+        );
     }
 }
 export default ConfigManager;
