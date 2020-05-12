@@ -15,6 +15,7 @@
  */
 
 const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -69,12 +70,10 @@ module.exports = {
         configs: [`${project}/configs/src/js/app.js`],
         react: [`${project}/react/src/js/app.js`, `${project}/react/src/less/app.less`],
     },
-    externals: isProduction
-        ? {
-              react: 'React',
-              'react-dom': 'ReactDOM',
-          }
-        : {},
+    externals: {
+        react: 'React',
+        'react-dom': 'ReactDOM',
+    },
     output: {
         path: `${__dirname}/src/main/content/jcr_root/apps/${projectName}/config-manager/common/clientlibs`,
         filename: '[name]/dist/js/app.min.js',
@@ -94,6 +93,18 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({ filename: '[name]/dist/css/app.min.css' }),
         new OptimizeCSSAssetsPlugin({}),
+        new CopyWebpackPlugin([
+            {
+                from: `${__dirname}/node_modules/react/umd/react.production.min.js`,
+                to: `${__dirname}/src/main/content/jcr_root/apps/dx/config-manager/common/clientlibs/reactumd/dist/js/react.production.min.js`,
+                type: 'file',
+            },
+            {
+                from: `${__dirname}/node_modules/react-dom/umd/react-dom.production.min.js`,
+                to: `${__dirname}/src/main/content/jcr_root/apps/dx/config-manager/common/clientlibs/reactumd/dist/js/react-dom.production.min.js`,
+                type: 'file',
+            },
+        ]),
     ],
     stats,
 };

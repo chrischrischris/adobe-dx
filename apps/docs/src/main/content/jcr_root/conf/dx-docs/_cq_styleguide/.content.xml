@@ -3,5 +3,6 @@
           jcr:primaryType="sling:Folder">
     <colors/>
     <components/>
+    <gradients />
     <icons/>
 </jcr:root>

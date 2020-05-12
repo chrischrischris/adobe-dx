@@ -6,6 +6,7 @@
   "scripts": {
     "aemsync": "aemsync -w jcr_root",
     "build-production": "NODE_ENV=production webpack --mode=production",
+    "pretty": "prettier --write \"jcr_root/**/*.{js,jsx}\"",
     "test": "jest 2>&1",
     "test-coverage": "./node_modules/.bin/jest --coverage --coverage-reporters=lcov 2>&1",
     "test-watch": "./node_modules/.bin/jest --watch --colors",
@@ -16,7 +17,7 @@
   "devDependencies": {
     "@babel/core": "^7.8.7",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.9.6",
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-react": "^7.8.3",
     "@babel/runtime-corejs3": "^7.8.7",
@@ -32,6 +33,7 @@
     "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "prettier": "2.0.5",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "style-loader": "^1.1.3",
@@ -44,7 +46,7 @@
     "@babel/runtime": "^7.8.7",
     "@react/collection-view": "file:react-collection-view-4.1.5.tgz",
     "@react/react-spectrum": "file:react-react-spectrum-2.25.0.tgz",
-    "react-gpickr": "^0.1.9"
+    "react-gpickr": "^0.2.0"
   },
   "resolutions": {
     "@react/collection-view": "file:react-collection-view-4.1.5.tgz"

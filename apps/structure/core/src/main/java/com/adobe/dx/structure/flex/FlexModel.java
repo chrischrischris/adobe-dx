@@ -19,6 +19,7 @@ package com.adobe.dx.structure.flex;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.caconfig.resource.ConfigurationResourceResolver;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.InjectionStrategy;
@@ -53,10 +54,12 @@ public class FlexModel {
             Resource gradientConfigs = configurationResolver.getResource(resource, "cq:styleguide", "gradients");
             Resource gradientConfig = gradientConfigs.getChild(gradient);
             if (gradientConfig != null) {
-                return gradientConfig.getValueMap().get("startColor", String.class);
+                ValueMap valueMap = gradientConfig.getValueMap();
+                if (valueMap != null) {
+                    return valueMap.get("gradientCss", String.class);
+                }
             }
         }
         return null;
     }
-
 }
